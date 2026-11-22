@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>视频获取 · 本机工具</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <header class="hero">
+        <p class="badge">仅本机运行</p>
+        <h1>视频获取</h1>
+        <p class="sub">
+          支持 <strong>B 站、YouTube、抖音、X</strong>。单个视频保存到
+          <code>~/Downloads/video-web/标题.mp4</code>；同一链接多集保存到同一子文件夹。
+        </p>
+      </header>
+
+      <section class="card setup-banner hidden" id="setupBanner">
+        <h2 class="setup-title">需要先安装环境</h2>
+        <p class="meta" id="setupIntro">检测到以下工具未安装，解析与下载将不可用。</p>
+        <ul id="setupList" class="setup-list"></ul>
+        <p class="setup-hint meta" id="setupHint"></p>
+      </section>
+
+      <section class="card">
+        <label class="label" for="url">视频链接</label>
+        <input
+          id="url"
+          type="url"
+          placeholder="B站 / YouTube / 抖音 / X 的视频或合集链接"
+          autocomplete="off"
+        />
+
+        <div class="row">
+          <label class="label" for="quality">清晰度</label>
+          <select id="quality">
+            <option value="720" selected>720P（推荐）</option>
+            <option value="1080">1080P</option>
+            <option value="480">480P</option>
+            <option value="best">最高可用</option>
+          </select>
+
+          <label class="label" for="browser">登录浏览器</label>
+          <select id="browser">
+            <option value="chrome" selected>Chrome</option>
+            <option value="safari">Safari</option>
+            <option value="brave">Brave</option>
+            <option value="edge">Edge</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn secondary" id="btnAnalyze">获取视频列表</button>
+          <button type="button" class="btn primary" id="btnDownload" disabled>
+            下载选中项
+          </button>
+        </div>
+      </section>
+
+      <section class="card hidden" id="entriesCard">
+        <div class="entries-toolbar">
+          <h2 class="entries-heading">可下载视频</h2>
+          <div class="entries-actions">
+            <button type="button" class="btn text" id="btnSelectAll">全选</button>
+            <button type="button" class="btn text" id="btnSelectNone">全不选</button>
+          </div>
+        </div>
+        <p id="entriesSummary" class="meta"></p>
+        <ul id="entriesList" class="entries-list"></ul>
+      </section>
+
+      <section class="card hidden" id="infoCard">
+        <div class="info-grid">
+          <img id="thumb" alt="" class="thumb hidden" referrerpolicy="no-referrer" />
+          <div>
+            <h2 id="infoTitle">—</h2>
+            <p id="infoMeta" class="meta"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card hidden" id="jobCard">
+        <div class="job-head">
+          <span id="jobStatus" class="status">准备中</span>
+          <span id="jobProgress" class="progress"></span>
+        </div>
+        <div class="bar"><div id="barFill" class="bar-fill"></div></div>
+        <p id="jobDetail" class="meta"></p>
+        <div id="dlLinks" class="dl-links hidden"></div>
+        <pre id="log" class="log hidden"></pre>
+      </section>
+
+      <p id="error" class="error hidden"></p>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
